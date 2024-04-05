@@ -1,0 +1,28 @@
+---
+import CountrySwitcher from "../../components/CountrySwitcher.astro";
+import WhereToStream from "../../components/WhereToStream.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+const params = Astro.params;
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${import.meta.env.PUBLIC_TMDB_AUTH}`,
+  },
+};
+const url = new URL(`https://api.themoviedb.org/3/movie/${params.id}`);
+
+const response = await fetch(url, options);
+const data = await response.json();
+---
+
+<MainLayout>
+  <div class="">{JSON.stringify(data)}</div>
+  <!-- topSection -->
+
+  <!-- Where to stream -->
+  <h1>Providers</h1>
+  <WhereToStream id={params.id} />
+  <CountrySwitcher id={params.id || ""} />
+</MainLayout>

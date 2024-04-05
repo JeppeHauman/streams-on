@@ -1,0 +1,31 @@
+---
+const { id } = Astro.props;
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${import.meta.env.PUBLIC_TMDB_AUTH}`,
+  },
+};
+const url = new URL(`https://api.themoviedb.org/3/movie/${id}/watch/providers`);
+const response = await fetch(url, options);
+const data = await response.json();
+const country = Astro.url.searchParams.get("country") || "DK";
+const countryProviders = data.results[country].flatrate || [];
+---
+
+<div>
+  {
+    countryProviders.length > 0 ? (
+      countryProviders.map((provider) => (
+        <img
+          class=""
+          src={`https://media.themoviedb.org/t/p/original/${provider.logo_path}`}
+          alt="asd"
+        />
+      ))
+    ) : (
+      <div>No streaming provider</div>
+    )
+  }
+</div>

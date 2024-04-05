@@ -1,0 +1,11 @@
+---
+import { Search } from "./search";
+
+const isHomePage = Astro.url.pathname === "/";
+console.log(Astro.url);
+---
+
+<header>
+  <a href="/">Home</a>
+  {isHomePage ? (<></>) : (<Search />)}
+</header>

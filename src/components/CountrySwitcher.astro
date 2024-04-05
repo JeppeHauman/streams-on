@@ -1,0 +1,14 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+console.log(Astro.url);
+---
+
+<div>
+  <a href={`${Astro.url.pathname}?country=US`}>US</a>
+  <a href={`${Astro.url.pathname}?country=DK`}>DK</a>
+  <a href={`${Astro.url.pathname}?country=DE`}>DE</a>
+</div>
