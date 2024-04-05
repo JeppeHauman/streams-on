@@ -20,9 +20,24 @@ const data = await response.json();
 <MainLayout>
   <div class="">{JSON.stringify(data)}</div>
   <!-- topSection -->
+  <div class="grid lg:grid-cols-2 lg:p-12">
+    <div>
+      <h1 class="lg:text-5xl font-bold">{data.title}</h1>
+      <h2 class="lg:text-3xl">{data.original_title}</h2>
+      <p>Release date: {data.release_date}</p>
+      <p>Length: {data.runtime} minutes</p>
+      <h4 class="mt-10">Streams on</h4>
+      <WhereToStream id={params.id} />
+    </div>
+    <div class="">
+      <img
+        src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
+        alt={`Poster for ${data.title}`}
+      />
+    </div>
+  </div>
 
   <!-- Where to stream -->
-  <h1>Providers</h1>
-  <WhereToStream id={params.id} />
+
   <CountrySwitcher id={params.id || ""} />
 </MainLayout>

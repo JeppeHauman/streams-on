@@ -17,7 +17,7 @@ const countryProviders = data.results[country].flatrate || [];
 <div>
   {
     countryProviders.length > 0 ? (
-      countryProviders.map((provider) => (
+      countryProviders.map((provider: { logo_path: string }) => (
         <img
           class=""
           src={`https://media.themoviedb.org/t/p/original/${provider.logo_path}`}

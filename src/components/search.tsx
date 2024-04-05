@@ -29,7 +29,6 @@ export const Search = component$(() => {
 
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data);
     return data.results as SearchResult[];
   });
 
