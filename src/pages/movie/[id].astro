@@ -26,6 +26,7 @@ const data = await response.json();
       { data.title != data.original_title &&  <h2 class="lg:text-3xl">{data.original_title}</h2> }
       <p>Release date: {data.release_date}</p>
       <p>Length: {data.runtime} minutes</p>
+      <p class="max-w-md">{ data.overview }</p>
       <h4 class="mt-10">Streams on</h4>
       <WhereToStream id={params.id} />
     </div>

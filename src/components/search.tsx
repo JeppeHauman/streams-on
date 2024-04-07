@@ -35,21 +35,20 @@ export const Search = component$(() => {
   return (
     <div class="relative">
       <input
-        class="border-[3px] border-black outline-none ring-0 border-opacity-0 rounded-xl px-2 py-2 w-full bg-zinc-50 text-zinc-900 placeholder-zinc-600 focus:outline-none focus:border-orange-600 focus:border-[3px] transition-all
-        "
+        class="border-[3px] border-black outline-none ring-0 border-opacity-0 mb-1 rounded-xl px-2 py-2 w-full bg-zinc-50 text-zinc-900 placeholder-zinc-600 focus:outline-none focus:border-orange-600 focus:border-[3px] transition-all"
         type="text"
         placeholder="Search"
         value={inputValue.value}
-        onInput$={(event, element) => (inputValue.value = element.value)}
+        onInput$={(_, element) => (inputValue.value = element.value)}
       />
       <Resource
         value={dropdownItems}
         onPending={() => <>Loading...</>}
         onResolved={(items) => (
-          <ul class="absolute top-full">
+          <ul class={`absolute rounded-md bg-orange-600 text-zinc-900 ${items.length != 0 && "p-1"}`}>
             {items.map((item, i) => (
-              <li key={i}>
-                <a href={`/movie/${item.id}`}>{item.title}</a>
+              <li class=" first:rounded-t-md last:rounded-b-md hover:text-zinc-100 top-full" key={i}>
+                <a class="block w-full h-full" href={`/movie/${item.id}`}>{item.title}</a>
               </li>
             ))}
           </ul>
