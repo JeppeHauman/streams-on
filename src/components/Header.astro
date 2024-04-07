@@ -4,7 +4,7 @@ import { Search } from "./search";
 const isHomePage = Astro.url.pathname === "/";
 ---
 
-<header>
-  <a href="/">Home</a>
+<header class="flex justify-between items-center mb-10 gap-5 p-3">
+  <a class="border-2 border-white rounded p-2 bg-zinc-900 hover:text-zinc-900 hover:bg-gray-300" href="/">Home</a>
   {isHomePage ? (<></>) : (<Search />)}
 </header>

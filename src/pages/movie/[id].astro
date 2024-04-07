@@ -23,7 +23,7 @@ const data = await response.json();
   <div class="grid lg:grid-cols-2 lg:p-12">
     <div>
       <h1 class="lg:text-5xl font-bold">{data.title}</h1>
-      <h2 class="lg:text-3xl">{data.original_title}</h2>
+      { data.title != data.original_title &&  <h2 class="lg:text-3xl">{data.original_title}</h2> }
       <p>Release date: {data.release_date}</p>
       <p>Length: {data.runtime} minutes</p>
       <h4 class="mt-10">Streams on</h4>
