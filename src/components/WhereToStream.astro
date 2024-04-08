@@ -1,5 +1,6 @@
 ---
 import CountrySwitcher from "./CountrySwitcher.astro";
+import { WhereToStreamQwik } from "./WhereToStreamQwik";
 
 const { id } = Astro.props;
 const options = {
@@ -15,21 +16,31 @@ const data = await response.json();
 const country = Astro.url.searchParams.get("country") || "DK";
 const countryProviders =
   data.results[country] !== undefined ? data.results[country] : [];
+console.log(countryProviders);
 ---
 
 <div>
-  {
-    countryProviders.length > 0 ? (
-      countryProviders.map((provider: { logo_path: string }) => (
-        <img
-          class=""
-          src={`https://media.themoviedb.org/t/p/original/${provider.logo_path}`}
-          alt="asd"
-        />
-      ))
-    ) : (
-      <div>No streaming provider</div>
-    )
-  }
-  <CountrySwitcher countries={Object.keys(data.results)} />
+  <WhereToStreamQwik
+    data={data.results}
+    countryCodes={Object.keys(data.results)}
+  />
 </div>
+
+<!-- <div class="">
+  <div class="flex gap-2">
+    {
+      countryProviders.hasOwnProperty("flatrate") ? (
+        countryProviders.flatrate.map((provider: { logo_path: string }) => (
+          <img
+            class=""
+            src={`https://media.themoviedb.org/t/p/original/${provider.logo_path}`}
+            alt="asd"
+          />
+        ))
+      ) : (
+        <div>No streaming provider</div>
+      )
+    }
+  </div>
+  <CountrySwitcher countries={Object.keys(data.results)} />
+</div> -->
