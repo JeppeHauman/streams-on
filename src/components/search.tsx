@@ -45,10 +45,19 @@ export const Search = component$(() => {
         value={dropdownItems}
         onPending={() => <>Loading...</>}
         onResolved={(items) => (
-          <ul class={`absolute rounded-md bg-orange-600 text-zinc-900 ${items.length != 0 && "p-1"}`}>
+          <ul
+            class={`absolute rounded-md bg-orange-600 text-zinc-900 ${
+              items.length != 0 && "p-1"
+            }`}
+          >
             {items.map((item, i) => (
-              <li class=" first:rounded-t-md last:rounded-b-md hover:text-zinc-100 top-full" key={i}>
-                <a class="block w-full h-full" href={`/movie/${item.id}`}>{item.title}</a>
+              <li
+                class=" first:rounded-t-md last:rounded-b-md hover:text-zinc-100 top-full"
+                key={i}
+              >
+                <a class="block w-full h-full" href={`/movie/${item.id}`}>
+                  {item.title}
+                </a>
               </li>
             ))}
           </ul>

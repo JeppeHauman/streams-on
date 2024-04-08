@@ -1,13 +1,20 @@
 ---
 interface Props {
-  id: string;
+  countries: string[];
 }
 
-const { id } = Astro.props;
+const { countries } = Astro.props;
 ---
 
-<div>
-  <a href={`${Astro.url.pathname}?country=US`}>US</a>
-  <a href={`${Astro.url.pathname}?country=DK`}>DK</a>
-  <a href={`${Astro.url.pathname}?country=DE`}>DE</a>
+<div class="divide-x-2">
+  {
+    countries.map((country) => (
+      <a
+        class="px-2 first-of-type:pl-0"
+        href={`${Astro.url.pathname}?country=${country}`}
+      >
+        {country}
+      </a>
+    ))
+  }
 </div>

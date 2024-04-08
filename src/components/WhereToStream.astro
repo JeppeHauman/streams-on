@@ -1,4 +1,6 @@
 ---
+import CountrySwitcher from "./CountrySwitcher.astro";
+
 const { id } = Astro.props;
 const options = {
   method: "GET",
@@ -11,7 +13,8 @@ const url = new URL(`https://api.themoviedb.org/3/movie/${id}/watch/providers`);
 const response = await fetch(url, options);
 const data = await response.json();
 const country = Astro.url.searchParams.get("country") || "DK";
-const countryProviders = data.results[country].flatrate || [];
+const countryProviders =
+  data.results[country] !== undefined ? data.results[country] : [];
 ---
 
 <div>
@@ -28,4 +31,5 @@ const countryProviders = data.results[country].flatrate || [];
       <div>No streaming provider</div>
     )
   }
+  <CountrySwitcher countries={Object.keys(data.results)} />
 </div>
