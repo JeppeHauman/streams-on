@@ -18,24 +18,24 @@ const data = await response.json();
 ---
 
 <MainLayout>
-  <div class="">{JSON.stringify(data)}</div>
   <!-- topSection -->
-  <div class="grid lg:grid-cols-2 lg:p-12">
-    <div>
-      <h1 class="lg:text-5xl font-bold">{data.title}</h1>
+  <div class="grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:p-12">
+    <div class="ml-auto">
+      <h1 class="lg:text-5xl font-bold mb-2">{data.title}</h1>
       {
         data.title != data.original_title && (
-          <h2 class="lg:text-3xl">{data.original_title}</h2>
+          <h2 class="lg:text-3xl mb-2">{data.original_title}</h2>
         )
       }
       <p>Release date: {data.release_date}</p>
       <p>Length: {data.runtime} minutes</p>
-      <p class="max-w-md">{data.overview}</p>
+      <p class="max-w-lg">{data.overview}</p>
       <h4 class="mt-10">Streams on</h4>
       <WhereToStream id={params.id} />
     </div>
     <div class="">
       <img
+        class="lg:h-[45rem]"
         src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
         alt={`Poster for ${data.title}`}
       />

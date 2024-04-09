@@ -3,10 +3,13 @@ import {
   component$,
   useResource$,
   useSignal,
+  useTask$,
 } from "@builder.io/qwik";
 
 export const Search = component$(() => {
   const inputValue = useSignal("");
+
+  const isProd = import.meta.env.PROD;
 
   const dropdownItems = useResource$(async ({ cleanup, track }) => {
     track(() => inputValue.value);
@@ -25,7 +28,12 @@ export const Search = component$(() => {
         accept: "application/json",
       },
     };
-    const url = new URL(`http://127.0.0.1:4321/api/${inputValue.value}`);
+
+    const url = new URL(
+      `${isProd ? "https://something" : "http://127.0.0.1:4321"}/api/${
+        inputValue.value
+      }`
+    );
 
     const response = await fetch(url, options);
     const data = await response.json();
@@ -62,6 +70,7 @@ export const Search = component$(() => {
             ))}
           </ul>
         )}
+        onRejected={() => <div>Something went terribly wrong. Try again</div>}
       />
     </div>
   );

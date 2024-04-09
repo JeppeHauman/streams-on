@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
-  const countryCode = useSignal<string>();
+  const countryCode = useSignal<string>("");
   const countryProviders = useSignal<{
     link: string;
     flatrate?: {
@@ -62,7 +62,10 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
           <option
             value="NONE"
             disabled
-            defaultSelected={countryCode.value === "NONE"}
+            defaultSelected={
+              countryCode.value === "NONE" ||
+              countryCodes.indexOf(countryCode.value) === -1
+            }
           >
             Select a Country
           </option>
