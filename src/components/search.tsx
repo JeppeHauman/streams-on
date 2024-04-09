@@ -43,16 +43,16 @@ export const Search = component$(() => {
       />
       <Resource
         value={dropdownItems}
-        onPending={() => <>Loading...</>}
+        onPending={() => <div class="absolute">Loading...</div>}
         onResolved={(items) => (
           <ul
-            class={`absolute rounded-md bg-orange-600 text-zinc-900 ${
+            class={`absolute left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 ${
               items.length != 0 && "p-1"
             }`}
           >
             {items.map((item, i) => (
               <li
-                class=" first:rounded-t-md last:rounded-b-md hover:text-zinc-100 top-full"
+                class="py-2 hover:bg-zinc-900 first:rounded-t-md last:rounded-b-md pl-3 top-full"
                 key={i}
               >
                 <a class="block w-full h-full" href={`/movie/${item.id}`}>

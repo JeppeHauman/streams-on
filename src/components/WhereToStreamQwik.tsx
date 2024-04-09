@@ -19,7 +19,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
 
   // Task runs once in browser/on client since we're not giving any 'track'
   useVisibleTask$(async () => {
-    countryCode.value = localStorage.getItem("countryCode") || "DK";
+    countryCode.value = localStorage.getItem("countryCode") || "NONE";
   });
 
   // Task runs on mount in browser and then every time we change countryCode
@@ -37,6 +37,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
           //@ts-ignore
           countryProviders.value.flatrate.map((provider) => (
             <img
+              key={provider.provider_id}
               class=""
               src={`https://media.themoviedb.org/t/p/original/${provider.logo_path}`}
               alt="asd"
@@ -46,11 +47,41 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
           <div>No streaming provider</div>
         )}
       </div>
-      <div class="flex gap-2 flex-wrap">
+      <div>
+        {countryCode.value === "NONE" && <p>Select a country below</p>}
+        <select
+          class="bg-zinc-950 text-zinc-100 px-2 py-1"
+          style="scrollbar-width:thin;"
+          name="countries"
+          id="countries-select"
+          onChange$={(event, el) => {
+            countryCode.value = el.value;
+            localStorage.setItem("countryCode", el.value);
+          }}
+        >
+          <option
+            value="NONE"
+            disabled
+            defaultSelected={countryCode.value === "NONE"}
+          >
+            Select a Country
+          </option>
+          {countryCodes.map((cC, i) => (
+            <option
+              defaultSelected={countryCode.value === cC}
+              key={i}
+              value={cC}
+            >
+              {cC}
+            </option>
+          ))}
+        </select>
+      </div>
+      {/* <div class="flex gap-2 flex-wrap">
         {countryCodes.map((cC) => (
           <button onClick$={() => (countryCode.value = cC)}>{cC}</button>
         ))}
-      </div>
+      </div> */}
       {/* <CountrySwitcher countries={Object.keys(data.results)} /> */}
     </div>
   );
