@@ -1,11 +1,13 @@
 ---
 import { Search } from "../components/search";
 import MainLayout from "../layouts/MainLayout.astro";
+import PopularList from "../components/PopularList.astro";
 ---
 
 <MainLayout>
   <h1 class="text-5xl text-orange-600 font-bold text-center">STREAMS ON!</h1>
   <div class="mt-52 p-4 flex flex-col max-w-lg mx-auto gap-4">
     <Search />
+    <PopularList />
   </div>
 </MainLayout>

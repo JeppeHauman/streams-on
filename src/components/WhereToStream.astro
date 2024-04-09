@@ -14,8 +14,7 @@ const response = await fetch(url, options);
 const data = await response.json();
 const country = Astro.url.searchParams.get("country") || "DK";
 const countryProviders =
-  data.results[country] !== undefined ? data.results[country] : [];
-console.log(countryProviders);
+data.results[country] !== undefined ? data.results[country] : [];
 ---
 
 <div>

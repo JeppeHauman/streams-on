@@ -28,7 +28,6 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
     if (countryCode.value && countryCode.value.length > 1) {
       countryProviders.value = data[countryCode.value];
     }
-    console.log(countryProviders.value);
   });
   return (
     <div class="">
