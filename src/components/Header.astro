@@ -7,7 +7,7 @@ const isHomePage = Astro.url.pathname === "/";
 ---
 
 <header
-  class="flex backdrop-blur z-10 justify-between items-center mb-5 gap-5 p-3 shadow-md border-b border-zinc-800 sticky top-0"
+  class="flex backdrop-blur z-50 justify-between items-center mb-5 gap-5 p-3 shadow-md border-b border-zinc-800 sticky top-0"
 >
   <a href="/"><Image src={logo} alt={"Streams On logo"} width={50} /></a>
   {!isHomePage && <Search />}

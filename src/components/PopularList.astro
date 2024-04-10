@@ -1,31 +1,32 @@
 ---
 import MovieCard from "./MovieCard.astro";
 const options = {
-    method: "GET",
-    headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${import.meta.env.PUBLIC_TMDB_AUTH}`,
-    },
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${import.meta.env.PUBLIC_TMDB_AUTH}`,
+  },
 };
 const url = new URL(
-    `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`
+  `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`
 );
 const response = await fetch(url, options);
 const data = await response.json();
 const movies = data.results.slice(0, 6);
 ---
+
 <h2 class="text-center text-2xl mt-4 text-orange-600">Popular Movies</h2>
-<div class="grid grid-cols-3 gap-2">
-    {
-        movies.map((movie: any) => {
-            return (
-                <MovieCard
-                    id={movie.id}
-                    title={movie.title}
-                    releaseDate={movie.release_date}
-                    poster={movie.poster_path}
-                />
-            );
-        })
-    }
+<div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
+  {
+    movies.map((movie: any) => {
+      return (
+        <MovieCard
+          id={movie.id}
+          title={movie.title}
+          releaseDate={movie.release_date}
+          poster={movie.poster_path}
+        />
+      );
+    })
+  }
 </div>

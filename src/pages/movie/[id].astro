@@ -20,8 +20,12 @@ const data = await response.json();
 <MainLayout>
   <!-- topSection -->
   <div class="grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:p-12">
-    <div class="ml-auto">
-      <h1 class="lg:text-5xl font-bold mb-2">{data.title}</h1>
+    <div
+      class={`max-w-lg text-center mx-auto lg:text-left lg:mx-0 lg:ml-auto order-last lg:order-first p-5 lg:p-0`}
+    >
+      <h1 class="text-4xl lg:text-5xl font-bold mb-2">
+        {data.title}
+      </h1>
       {
         data.title != data.original_title && (
           <h2 class="lg:text-3xl mb-2">{data.original_title}</h2>
@@ -29,13 +33,13 @@ const data = await response.json();
       }
       <p>Release date: {data.release_date}</p>
       <p>Length: {data.runtime} minutes</p>
-      <p class="max-w-lg">{data.overview}</p>
+      <p class="max-w-lg text-balance">{data.overview}</p>
       <h4 class="mt-10">Streams on</h4>
       <WhereToStream id={params.id} />
     </div>
-    <div class="">
+    <div class="relative w-fit">
       <img
-        class="lg:h-[45rem]"
+        class="mx-auto w-3/4 md:w-1/2 lg:w-auto lg:max-h-[45rem]"
         src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
         alt={`Poster for ${data.title}`}
       />

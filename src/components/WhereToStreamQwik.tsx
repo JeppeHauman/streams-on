@@ -31,7 +31,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
   });
   return (
     <div class="">
-      <div class="flex gap-2">
+      <div class="flex gap-2 items-center justify-center lg:justify-normal">
         {countryProviders.value?.hasOwnProperty("flatrate") ? (
           //@ts-ignore
           countryProviders.value.flatrate.map((provider) => (
@@ -43,7 +43,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
             />
           ))
         ) : (
-          <div>No streaming provider</div>
+          <p class="mx-auto lg:mx-0">No streaming provider</p>
         )}
       </div>
       <div>

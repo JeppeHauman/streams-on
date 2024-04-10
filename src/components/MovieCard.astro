@@ -5,13 +5,18 @@ const { releaseDate } = Astro.props;
 const { poster } = Astro.props;
 ---
 
-
 <a href={`/movie/${id}`}>
-    <div class="text-gray-300 relative group rounded-md">
-          <img src={`https://media.themoviedb.org/t/p/original${poster}`} width={400} class="group-hover:opacity-35 transition ease-in-out duration-150 rounded-md">
-          <div class="absolute p-2 bottom-0 hidden top-0 opacity-0 group-hover:block group-hover:opacity-100 transition-opacity duration-500 left-0">
-            <h3 class="text-lg font-bold">{title}</h3>
-            <span class="text-sm mt-full inline-block">{releaseDate}</span>
-          </div>
+  <div class="text-gray-300 relative group rounded-md">
+    <img
+      src={`https://media.themoviedb.org/t/p/original${poster}`}
+      width={400}
+      class="group-hover:opacity-35 transition ease-in-out duration-150 rounded-md"
+    />
+    <div
+      class="absolute p-2 bottom-0 hidden top-0 opacity-0 group-hover:block group-hover:opacity-100 transition-opacity duration-500 left-0"
+    >
+      <h3 class="text-lg font-bold">{title}</h3>
+      <span class="text-sm mt-full inline-block">{releaseDate}</span>
     </div>
+  </div>
 </a>
