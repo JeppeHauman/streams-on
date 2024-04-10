@@ -31,9 +31,9 @@ export const Search = component$(() => {
     };
 
     const url = new URL(
-      `${isProd ? "https://something" : "http://127.0.0.1:4321"}/api/${
-        inputValue.value
-      }`
+      `${
+        isProd ? "https://streams-on.vercel.app" : "http://127.0.0.1:4321"
+      }/api/${inputValue.value}`
     );
 
     const response = await fetch(url, options);
