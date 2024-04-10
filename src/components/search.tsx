@@ -32,7 +32,7 @@ export const Search = component$(() => {
 
     const url = new URL(
       `${
-        isProd ? "https://streams-on.vercel.app" : "http://127.0.0.1:4321"
+        isProd ? "https://streams-on.vercel.app" : "http://localhost:4321/"
       }/api/${inputValue.value}`
     );
 
@@ -77,7 +77,15 @@ export const Search = component$(() => {
       </div>
       <Resource
         value={dropdownItems}
-        onPending={() => <div class="absolute">Loading...</div>}
+        onPending={() => (
+          <ul
+            class={`absolute left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 p-1`}
+          >
+            <li class="py-2 hover:bg-zinc-900 first:rounded-t-md last:rounded-b-md pl-3 top-full">
+              Loading...
+            </li>
+          </ul>
+        )}
         onResolved={(items) => (
           <ul
             class={`absolute left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 ${
