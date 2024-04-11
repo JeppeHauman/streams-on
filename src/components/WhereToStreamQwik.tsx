@@ -24,25 +24,17 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
       display_priority: number;
     }[];
   }>();
-
+  countries.registerLocale(en);
   // Task runs once in browser/on client since we're not giving any 'track'
   useVisibleTask$(() => {
-    countries.registerLocale(en);
     countryCode.value = localStorage.getItem("countryCode") || "NONE";
-    countryName.value = countries.getName(countryCode.value, "en", {
-      select: "alias",
-    })!;
   });
 
   // Task runs on mount in browser and then every time we change countryCode
   useVisibleTask$(({ track }) => {
-    countries.registerLocale(en);
     track(() => countryCode.value);
     if (countryCode.value && countryCode.value.length > 1) {
       countryProviders.value = data[countryCode.value];
-      countryName.value = countries.getName(countryCode.value, "en", {
-        select: "alias",
-      })!;
     }
   });
   return (
