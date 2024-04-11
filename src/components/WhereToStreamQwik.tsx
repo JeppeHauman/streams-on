@@ -25,6 +25,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
     }[];
   }>();
   countries.registerLocale(en);
+
   // Task runs once in browser/on client since we're not giving any 'track'
   useVisibleTask$(() => {
     countryCode.value = localStorage.getItem("countryCode") || "NONE";
