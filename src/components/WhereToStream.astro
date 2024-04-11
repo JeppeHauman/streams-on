@@ -12,9 +12,6 @@ const options = {
 const url = new URL(`https://api.themoviedb.org/3/movie/${id}/watch/providers`);
 const response = await fetch(url, options);
 const data = await response.json();
-const country = Astro.url.searchParams.get("country") || "DK";
-const countryProviders =
-data.results[country] !== undefined ? data.results[country] : [];
 ---
 
 <div>

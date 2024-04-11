@@ -97,7 +97,11 @@ export const Search = component$(() => {
                 class="py-2 hover:bg-zinc-900 first:rounded-t-md last:rounded-b-md pl-3 top-full"
                 key={i}
               >
-                <a class="block w-full h-full" href={`/movie/${item.id}`}>
+                <a
+                  class="block w-full h-full"
+                  onClick$={() => (inputValue.value = "")}
+                  href={`/movie/${item.id}`}
+                >
                   {item.title}
                 </a>
               </li>
