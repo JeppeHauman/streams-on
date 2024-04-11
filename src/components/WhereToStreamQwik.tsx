@@ -1,4 +1,11 @@
-import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
+import {
+  component$,
+  useSignal,
+  useTask$,
+  useVisibleTask$,
+} from "@builder.io/qwik";
+import countries from "i18n-iso-countries";
+import en from "i18n-iso-countries/langs/en.json";
 
 interface Props {
   data: any;
@@ -19,6 +26,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
 
   // Task runs once in browser/on client since we're not giving any 'track'
   useVisibleTask$(async () => {
+    countries.registerLocale(en);
     countryCode.value = localStorage.getItem("countryCode") || "NONE";
   });
 
@@ -42,12 +50,16 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
               alt="asd"
             />
           ))
+        ) : countryCode.value !== "NONE" ? (
+          <p class="mx-auto lg:mx-0">
+            No streaming provider for{" "}
+            {countries.getName(countryCode.value, "en", { select: "alias" })}
+          </p>
         ) : (
-          <p class="mx-auto lg:mx-0">No streaming provider</p>
+          <p>Select a country below</p>
         )}
       </div>
       <div>
-        {countryCode.value === "NONE" && <p>Select a country below</p>}
         <select
           class="bg-zinc-950 text-zinc-100 px-2 py-1"
           style="scrollbar-width:thin;"
@@ -74,7 +86,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
               key={i}
               value={cC}
             >
-              {cC}
+              {countries.getName(cC, "en", { select: "alias" })}
             </option>
           ))}
         </select>
