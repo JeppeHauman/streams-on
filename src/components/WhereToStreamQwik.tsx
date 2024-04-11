@@ -24,6 +24,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
       display_priority: number;
     }[];
   }>();
+  countries.registerLocale(en);
 
   // Task runs once in browser/on client since we're not giving any 'track'
   useVisibleTask$(() => {
@@ -36,7 +37,6 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
 
   // Task runs on mount in browser and then every time we change countryCode
   useVisibleTask$(({ track }) => {
-    countries.registerLocale(en);
     track(() => countryCode.value);
     if (countryCode.value && countryCode.value.length > 1) {
       countryProviders.value = data[countryCode.value];
