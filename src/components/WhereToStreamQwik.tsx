@@ -14,6 +14,7 @@ interface Props {
 
 export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
   const countryCode = useSignal<string>("");
+  const countryName = useSignal("");
   const countryProviders = useSignal<{
     link: string;
     flatrate?: {
@@ -28,13 +29,20 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
   useVisibleTask$(async () => {
     countries.registerLocale(en);
     countryCode.value = localStorage.getItem("countryCode") || "NONE";
+    countryName.value = countries.getName(countryCode.value, "en", {
+      select: "alias",
+    })!;
   });
 
   // Task runs on mount in browser and then every time we change countryCode
   useVisibleTask$(({ track }) => {
+    countries.registerLocale(en);
     track(() => countryCode.value);
     if (countryCode.value && countryCode.value.length > 1) {
       countryProviders.value = data[countryCode.value];
+      countryName.value = countries.getName(countryCode.value, "en", {
+        select: "alias",
+      })!;
     }
   });
   return (
