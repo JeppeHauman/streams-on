@@ -9,5 +9,8 @@ import vercel from "@astrojs/vercel/serverless";
 export default defineConfig({
   output: "server",
   integrations: [qwikdev(), tailwind(), icon()],
-  adapter: vercel()
+  adapter: vercel(),
+  image: {
+    remotePatterns: [{ protocol: "https" }],
+  },
 });
