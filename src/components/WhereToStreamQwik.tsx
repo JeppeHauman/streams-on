@@ -39,14 +39,14 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
     }
   });
   return (
-    <div class="">
+    <div class="grid gap-4">
       <div class="flex gap-2 items-center justify-center lg:justify-normal">
         {countryProviders.value?.hasOwnProperty("flatrate") ? (
           //@ts-ignore
           countryProviders.value.flatrate.map((provider) => (
             <img
               key={provider.provider_id}
-              class=""
+              class="rounded-sm"
               src={`https://media.themoviedb.org/t/p/original/${provider.logo_path}`}
               alt="asd"
             />
@@ -62,7 +62,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
       </div>
       <div>
         <select
-          class="bg-zinc-950 text-zinc-100 px-2 py-1"
+          class="bg-zinc-950 text-zinc-100 px-2 py-1 rounded-sm"
           style="scrollbar-width:thin;"
           name="countries"
           id="countries-select"
