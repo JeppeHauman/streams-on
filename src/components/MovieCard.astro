@@ -1,18 +1,26 @@
 ---
 import { Image } from "astro:assets";
-const { id } = Astro.props;
-const { title } = Astro.props;
-const { releaseDate } = Astro.props;
-const { poster } = Astro.props;
+
+interface Props {
+  id: number;
+  title: string;
+  releaseDate: string;
+  poster: string;
+}
+
+const { id, title, releaseDate, poster } = Astro.props;
 ---
 
-<a href={`/movie/${id}`}>
-  <div class="text-gray-300 relative group rounded-md">
+<a
+  class="w-fit bg-zinc-700 rounded-md group hover:bg-zinc-900 transition-all"
+  href={`/movie/${id}`}
+>
+  <div class="text-gray-300 relative rounded-md">
     <Image
       src={`https://media.themoviedb.org/t/p/original${poster}`}
-      width={200}
-      height={200}
-      class="group-hover:opacity-35 transition ease-in-out duration-150 rounded-md"
+      width={300}
+      height={300}
+      class="group-hover:opacity-35 transition ease-in-out duration-150 rounded-md aspect-[11/16] object-cover"
       alt={""}
     />
     <div
