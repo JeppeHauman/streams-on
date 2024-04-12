@@ -39,7 +39,7 @@ const data = await response.json();
     <div class="relative w-fit">
       <img
         class="mx-auto w-3/4 md:w-1/2 lg:w-auto lg:max-h-[45rem]"
-        src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
+        src={data.poster_path ? `https://image.tmdb.org/t/p/original/${data.poster_path}` : '/imagePlaceholder.png'}
         alt={`Poster for ${data.title}`}
       />
     </div>
