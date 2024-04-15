@@ -23,7 +23,7 @@ const data = await response.json();
     <div
       class={`max-w-lg text-center mx-auto lg:text-left lg:mx-0 lg:ml-auto order-last lg:order-first p-5 lg:p-0`}
     >
-      <h1 class="text-4xl lg:text-5xl font-bold mb-2">
+      <h1 class="text-4xl lg:text-5xl font-bold mb-5">
         {data.title}
       </h1>
       {
@@ -31,6 +31,76 @@ const data = await response.json();
           <h2 class="lg:text-3xl mb-2">{data.original_title}</h2>
         )
       }
+      <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
+        {
+          data.genres.map(({name}: {name: string}) => {
+            let bgColor = ""
+
+            switch (name) {
+              case "Science Fiction":
+                bgColor =  "bg-purple-700"
+                break
+              case "Adventure":
+                bgColor =  "bg-yellow-700"
+                break
+              case "Action":
+                bgColor =  "bg-red-800"
+                break
+              case "Animation":
+                bgColor =  "bg-blue-400"
+                break
+              case "Fantasy":
+                bgColor =  "bg-cyan-700"
+                break
+              case "Comedy":
+                bgColor =  "bg-green-600"
+                break
+              case "Crime":
+                bgColor =  "bg-black"
+                break
+              case "Documentary":
+                bgColor =  "bg-yellow-950"
+                break
+              case "Drama":
+                bgColor =  "bg-white text-black"
+                break
+              case "Family":
+                bgColor =  "bg-emerald-300 text-black"
+                break
+              case "History":
+                bgColor =  "bg-orange-950"
+                break
+              case "Horror":
+                bgColor =  "bg-black text-red-950"
+                break
+              case "Music":
+                bgColor =  "bg-fuchsia-900"
+                break
+              case "Mystery":
+                bgColor =  "bg-lime-950"
+                break
+              case "Romance":
+                bgColor =  "bg-pink-500"
+                break
+              case "Thriller":
+                bgColor =  "bg-blue-950"
+                break
+              case "War":
+                bgColor =  "bg-red-900"
+                break
+              case "Western":
+                bgColor =  "bg-yellow-300"
+                break
+            }
+            return (
+              <span class=`border-2 text-xs select-none rounded-lg font-bold w-fit mb-3 p-1 px-2 text-white ${bgColor}`>
+                {name}
+              </span>
+            )
+          })
+
+        }
+      </div>
       <p>Release date: {data.release_date}</p>
       <p>Length: {data.runtime} minutes</p>
       <p class="max-w-lg text-balance">{data.overview}</p>
