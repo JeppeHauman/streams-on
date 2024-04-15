@@ -7,10 +7,10 @@ const isHomepage = Astro.url.pathname === "/";
 ---
 
 <MainLayout>
-  <h1 class="text-5xl px-4 text-orange-600 font-bold text-center">
+  <h1 class="text-2xl sm:text-5xl px-4 text-orange-600 font-bold text-center">
     STREAMS ON!
   </h1>
-  <div class="mt-20 lg:mt-52 p-4 flex flex-col max-w-lg mx-auto gap-4">
+  <div class="mt-10 lg:mt-32 p-4 flex flex-col max-w-lg mx-auto gap-4">
     <Search isHomepage={isHomepage} />
     <PopularList />
   </div>

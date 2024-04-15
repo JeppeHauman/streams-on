@@ -15,7 +15,7 @@ const data = await response.json();
 const movies = data.results.slice(0, 6);
 ---
 
-<h2 class="text-center text-2xl mt-4 text-orange-600">Popular Movies</h2>
+<h2 class="text-center text-xl sm:text-2xl mt-4 text-orange-600">Popular Movies</h2>
 <div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
   {
     movies.map((movie: Movie) => {
