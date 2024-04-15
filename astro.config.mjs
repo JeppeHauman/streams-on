@@ -11,6 +11,6 @@ export default defineConfig({
   integrations: [qwikdev(), tailwind(), icon()],
   adapter: vercel(),
   image: {
-    remotePatterns: [{ protocol: "https" }],
+    domains: ["themoviedb.org"],
   },
 });

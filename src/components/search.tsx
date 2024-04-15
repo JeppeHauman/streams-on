@@ -6,7 +6,7 @@ import {
   useTask$,
 } from "@builder.io/qwik";
 
-export const Search = component$(() => {
+export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
   const inputValue = useSignal("");
   const inputRef = useSignal<HTMLElement>();
 
@@ -46,7 +46,7 @@ export const Search = component$(() => {
       <div class="relative">
         <input
           ref={inputRef}
-          class="border-[3px] border-black outline-none ring-0 border-opacity-0 rounded-xl px-2 py-1 lg:py-2 w-full bg-zinc-50 text-zinc-900 placeholder-zinc-600 focus:outline-none focus:border-orange-600 focus:border-[3px] transition-all"
+          class="border-[3px] border-black outline-none ring-0 border-opacity-0 rounded-xl px-2 py-1 lg:py-2 lg:min-w-96 w-full bg-zinc-50 text-zinc-900 placeholder-zinc-600 focus:outline-none focus:border-orange-600 focus:border-[3px] transition-all"
           type="text"
           placeholder="Search"
           value={inputValue.value}
@@ -88,9 +88,15 @@ export const Search = component$(() => {
         )}
         onResolved={(items) => (
           <ul
-            class={`absolute left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 ${
+            class={`absolute overflow-y-auto overflow-x-hidden left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 ${
               items.length != 0 && "p-1"
-            }`}
+            }  ${items.length === 1 && "h-24"} ${
+              items.length === 2 && "h-44"
+            } ${items.length === 3 && "h-72"} ${
+              items.length > 3 && isHomepage
+                ? "h-[50vh]"
+                : items.length > 3 && "h-[70vh]"
+            } `}
           >
             {items.map((item, i) => (
               <li
@@ -98,11 +104,28 @@ export const Search = component$(() => {
                 key={i}
               >
                 <a
-                  class="block w-full h-full"
+                  class="w-full h-full grid grid-cols-[1fr_5fr] gap-2"
                   onClick$={() => (inputValue.value = "")}
                   href={`/movie/${item.id}`}
                 >
-                  {item.title}
+                  <div class="w-8 lg:w-12">
+                    <img
+                      class="w-full aspect-[11/16] object-cover"
+                      src={
+                        item.poster_path !== null
+                          ? `https://media.themoviedb.org/t/p/original${item.poster_path}`
+                          : "../../imagePlaceholder.png"
+                      }
+                      alt={`Movieposter of ${item.title}`}
+                    />
+                  </div>
+
+                  <div class="flex flex-col grow">
+                    <p class="">{item.title}</p>
+                    {item.original_title !== item.title && (
+                      <p class="">{item.original_title}</p>
+                    )}
+                  </div>
                 </a>
               </li>
             ))}

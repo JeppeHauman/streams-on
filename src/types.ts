@@ -2,6 +2,7 @@ type SearchResult = {
   id: string;
   title: string;
   original_title: string;
+  poster_path: string;
 };
 
 type Movie = {

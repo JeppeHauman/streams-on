@@ -15,10 +15,14 @@ const data = await response.json();
 ---
 
 <div>
-  <WhereToStreamQwik
-    data={data.results}
-    countryCodes={Object.keys(data.results)}
-  />
+  {
+    data.results && (
+      <WhereToStreamQwik
+        data={data.results}
+        countryCodes={Object.keys(data.results)}
+      />
+    )
+  }
 </div>
 
 <!-- <div class="">

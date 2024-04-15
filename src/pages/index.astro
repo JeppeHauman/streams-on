@@ -2,12 +2,16 @@
 import { Search } from "../components/search";
 import MainLayout from "../layouts/MainLayout.astro";
 import PopularList from "../components/PopularList.astro";
+
+const isHomepage = Astro.url.pathname === "/";
 ---
 
 <MainLayout>
-  <h1 class="text-5xl text-orange-600 font-bold text-center">STREAMS ON!</h1>
+  <h1 class="text-5xl px-4 text-orange-600 font-bold text-center">
+    STREAMS ON!
+  </h1>
   <div class="mt-20 lg:mt-52 p-4 flex flex-col max-w-lg mx-auto gap-4">
-    <Search />
+    <Search isHomepage={isHomepage} />
     <PopularList />
   </div>
 </MainLayout>

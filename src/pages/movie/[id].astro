@@ -17,7 +17,7 @@ const response = await fetch(url, options);
 const data = await response.json();
 ---
 
-<MainLayout>
+<MainLayout movieTitle={data.title}>
   <!-- topSection -->
   <div class="grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:p-12">
     <div

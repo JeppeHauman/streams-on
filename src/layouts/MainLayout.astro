@@ -1,6 +1,13 @@
 ---
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+
+const { movieTitle } = Astro.props;
+
+let title = "Streams On";
+if (movieTitle) {
+  title = `Streams On | ${movieTitle}`;
+}
 ---
 
 <html lang="en">
@@ -9,7 +16,7 @@ import Header from "../components/Header.astro";
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Streams On</title>
+    <title>{title}</title>
   </head>
   <body class="bg-zinc-900 text-gray-100 min-h-screen flex flex-col">
     <Header />

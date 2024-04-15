@@ -12,5 +12,7 @@ const isHomePage = Astro.url.pathname === "/";
   <a class="w-8 lg:w-12" href="/"
     ><Image src={logo} alt={"Streams On logo"} /></a
   >
-  {!isHomePage && <Search />}
+  <div class="grow max-w-sm lg:max-w-lg">
+    {!isHomePage && <Search isHomepage={isHomePage} />}
+  </div>
 </header>
