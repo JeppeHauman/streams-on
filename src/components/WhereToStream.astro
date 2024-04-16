@@ -12,15 +12,17 @@ const options = {
 const url = new URL(`https://api.themoviedb.org/3/movie/${id}/watch/providers`);
 const response = await fetch(url, options);
 const data = await response.json();
+let countryCodes: string[] = [];
+for (const country in data.results) {
+  if (data.results[country].hasOwnProperty("flatrate"))
+    countryCodes.push(country);
+}
 ---
 
 <div>
   {
     data.results && (
-      <WhereToStreamQwik
-        data={data.results}
-        countryCodes={Object.keys(data.results)}
-      />
+      <WhereToStreamQwik data={data.results} countryCodes={countryCodes} />
     )
   }
 </div>
