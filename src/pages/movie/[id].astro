@@ -102,11 +102,13 @@ const data = await response.json();
           })
         }
       </div>
-      <p>Release date: {data.release_date}</p>
-      <p>Length: {data.runtime} minutes</p>
-      <p class="max-w-lg text-balance">{data.overview}</p>
-      <h4 class="mt-10">Streams on</h4>
-      <WhereToStream id={params.id} />
+      <p class="text-sm">Release date: {data.release_date}</p>
+      <p class="text-sm mb-3">Length: {data.runtime} minutes</p>
+      <p class="text-balance mb-10">{data.overview}</p>
+      <div class="rounded-lg p-4 bg-gradient-to-br from-[#dd4f02] to-[#f7aa00] text-white">
+        <h4 class="text-2xl mb-3">Streams on</h4>
+        <WhereToStream id={params.id} />
+      </div>
     </div>
     <div class="relative">
       <img

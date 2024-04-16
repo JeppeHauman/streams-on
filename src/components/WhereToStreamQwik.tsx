@@ -40,7 +40,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
   });
   return (
     <div class="grid gap-4">
-      <div class="flex gap-2 items-center justify-center lg:justify-normal">
+      <div class="flex flex-wrap gap-2 items-center justify-center lg:justify-normal">
         {countryProviders.value?.hasOwnProperty("flatrate") ? (
           //@ts-ignore
           countryProviders.value.flatrate.map((provider) => (
@@ -62,7 +62,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
       </div>
       <div>
         <select
-          class="bg-zinc-950 text-zinc-100 px-2 py-1 rounded-sm"
+          class="bg-zinc-950 text-zinc-100 px-2 cursor-pointer py-1 rounded-lg"
           style="scrollbar-width:thin;"
           name="countries"
           id="countries-select"
