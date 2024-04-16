@@ -33,72 +33,73 @@ const data = await response.json();
       }
       <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
         {
-          data.genres.map(({name}: {name: string}) => {
-            let bgColor = ""
+          data.genres.map(({ name }: { name: string }) => {
+            let bgColor = "";
 
             switch (name) {
               case "Science Fiction":
-                bgColor =  "bg-purple-700"
-                break
+                bgColor = "bg-purple-700";
+                break;
               case "Adventure":
-                bgColor =  "bg-yellow-700"
-                break
+                bgColor = "bg-yellow-700";
+                break;
               case "Action":
-                bgColor =  "bg-red-800"
-                break
+                bgColor = "bg-red-800";
+                break;
               case "Animation":
-                bgColor =  "bg-blue-400"
-                break
+                bgColor = "bg-blue-400";
+                break;
               case "Fantasy":
-                bgColor =  "bg-cyan-700"
-                break
+                bgColor = "bg-cyan-700";
+                break;
               case "Comedy":
-                bgColor =  "bg-green-600"
-                break
+                bgColor = "bg-green-600";
+                break;
               case "Crime":
-                bgColor =  "bg-black"
-                break
+                bgColor = "bg-black";
+                break;
               case "Documentary":
-                bgColor =  "bg-yellow-950"
-                break
+                bgColor = "bg-yellow-950";
+                break;
               case "Drama":
-                bgColor =  "bg-white text-black"
-                break
+                bgColor = "bg-white text-black";
+                break;
               case "Family":
-                bgColor =  "bg-emerald-300 text-black"
-                break
+                bgColor = "bg-emerald-300 text-black";
+                break;
               case "History":
-                bgColor =  "bg-orange-950"
-                break
+                bgColor = "bg-orange-950";
+                break;
               case "Horror":
-                bgColor =  "bg-black text-red-950"
-                break
+                bgColor = "bg-black ";
+                break;
               case "Music":
-                bgColor =  "bg-fuchsia-900"
-                break
+                bgColor = "bg-fuchsia-900";
+                break;
               case "Mystery":
-                bgColor =  "bg-lime-950"
-                break
+                bgColor = "bg-lime-950";
+                break;
               case "Romance":
-                bgColor =  "bg-pink-500"
-                break
+                bgColor = "bg-pink-500";
+                break;
               case "Thriller":
-                bgColor =  "bg-blue-950"
-                break
+                bgColor = "bg-blue-950";
+                break;
               case "War":
-                bgColor =  "bg-red-900"
-                break
+                bgColor = "bg-red-950";
+                break;
               case "Western":
-                bgColor =  "bg-yellow-300"
-                break
+                bgColor = "bg-yellow-300";
+                break;
             }
             return (
-              <span class=`border-2 text-xs select-none rounded-lg font-bold w-fit mb-3 p-1 px-2 text-white ${bgColor}`>
+              <span
+                class={`border-2 text-xs select-none rounded-lg font-bold w-fit mb-3 p-1 px-2 ${bgColor}`}
+              >
                 {name}
               </span>
-            )
+            );
           })
-
         }
       </div>
       <p>Release date: {data.release_date}</p>
