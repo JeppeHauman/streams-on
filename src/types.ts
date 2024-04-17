@@ -14,3 +14,17 @@ type Movie = {
   poster_path: string;
   runtime: number;
 };
+
+type Series = {
+  id: number;
+  name: string;
+  original_name: string;
+  first_air_date: string;
+  poster_path: string;
+  number_of_seasons: number;
+  overview: string;
+  genres: {
+    id: number;
+    name: string;
+  }[];
+};

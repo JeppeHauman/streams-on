@@ -1,34 +1,36 @@
 ---
 import MovieCard from "./MovieCard.astro";
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: `Bearer ${import.meta.env.PUBLIC_TMDB_AUTH}`,
-  },
-};
-const url = new URL(
-  `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`
-);
-const response = await fetch(url, options);
-const data = await response.json();
-const movies = data.results.slice(0, 6);
+import SeriesCard from "./SeriesCard.astro";
+
+interface Props {
+  movies?: Movie[];
+  series?: Series[];
+}
+
+const { movies, series } = Astro.props;
 ---
 
-<h2 class="text-center font-bold text-xl sm:text-2xl mt-4 text-orange-600">
-  Popular Movies
-</h2>
 <div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
   {
-    movies.map((movie: Movie) => {
-      return (
-        <MovieCard
-          id={movie.id}
-          title={movie.title}
-          releaseDate={movie.release_date}
-          poster={movie.poster_path}
-        />
-      );
-    })
+    movies
+      ? movies.map((movie: Movie) => {
+          return (
+            <MovieCard
+              id={movie.id}
+              title={movie.title}
+              releaseDate={movie.release_date}
+              poster={movie.poster_path}
+            />
+          );
+        })
+      : series &&
+        series.map((series: Series) => (
+          <SeriesCard
+            id={series.id}
+            title={series.name}
+            releaseDate={series.first_air_date}
+            poster={series.poster_path}
+          />
+        ))
   }
 </div>

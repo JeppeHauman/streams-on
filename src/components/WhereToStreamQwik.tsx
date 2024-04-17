@@ -45,6 +45,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
           //@ts-ignore
           countryProviders.value.flatrate.map((provider) => (
             <img
+              title={provider.provider_name}
               key={provider.provider_id}
               class="rounded-sm"
               src={`https://media.themoviedb.org/t/p/original/${provider.logo_path}`}
@@ -92,6 +93,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
           ))}
         </select>
       </div>
+      <p class="text-xs text-right">Data provided by JustWatch</p>
       {/* <div class="flex gap-2 flex-wrap">
         {countryCodes.map((cC) => (
           <button onClick$={() => (countryCode.value = cC)}>{cC}</button>

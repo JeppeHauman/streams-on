@@ -1,7 +1,8 @@
 ---
 import { Search } from "../components/search";
 import MainLayout from "../layouts/MainLayout.astro";
-import PopularList from "../components/PopularList.astro";
+import PopularMovies from "../components/PopularMovies.astro";
+import PopularSeries from "../components/PopularSeries.astro";
 
 const isHomepage = Astro.url.pathname === "/";
 ---
@@ -15,7 +16,7 @@ const isHomepage = Astro.url.pathname === "/";
     </h1>
   </div>
   <div class="mt-10 lg:mt-32 p-4 flex flex-col max-w-lg mx-auto gap-4">
-    <Search isHomepage={isHomepage} />
-    <PopularList />
+    <PopularMovies />
+    <PopularSeries />
   </div>
 </MainLayout>
