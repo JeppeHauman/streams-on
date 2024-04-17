@@ -48,7 +48,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
               key={provider.provider_id}
               class="rounded-sm"
               src={`https://media.themoviedb.org/t/p/original/${provider.logo_path}`}
-              alt="asd"
+              alt={`${provider.provider_name} logo`}
             />
           ))
         ) : countryCode.value !== "NONE" ? (

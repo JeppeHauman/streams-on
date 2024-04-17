@@ -31,8 +31,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
     };
 
     const url = new URL(
-      `${
-        isProd ? "https://streams-on.vercel.app" : "http://localhost:4321/"
+      `${isProd ? "https://streams-on.vercel.app" : "http://localhost:4321/"
       }/api/${inputValue.value}`
     );
 
@@ -55,9 +54,8 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
         />
 
         <button
-          class={`${
-            inputValue.value.length < 1 && "hidden"
-          } absolute inline-block text-2xl font-bold right-2 top-1/2 -translate-y-1/2 text-zinc-900 hover:text-zinc-700`}
+          class={`${inputValue.value.length < 1 && "hidden"
+            } absolute inline-block text-2xl font-bold right-2 top-1/2 -translate-y-1/2 text-zinc-900 hover:text-zinc-700`}
           onClick$={() => {
             inputValue.value = "";
             inputRef.value?.focus();
@@ -89,15 +87,12 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
         )}
         onResolved={(items) => (
           <ul
-            class={`absolute overflow-y-auto overflow-x-hidden left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 ${
-              items.length != 0 && "p-1"
-            }  ${items.length === 1 && "h-24"} ${
-              items.length === 2 && "h-44"
-            } ${items.length === 3 && "h-72"} ${
-              items.length > 3 && isHomepage
+            class={`absolute overflow-y-auto overflow-x-hidden left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 ${items.length != 0 && "p-1"
+              }  ${items.length === 1 && "h-24"} ${items.length === 2 && "h-44"
+              } ${items.length === 3 && "h-72"} ${items.length > 3 && isHomepage
                 ? "h-[50vh]"
                 : items.length > 3 && "h-[70vh]"
-            } `}
+              } `}
           >
             {items.map((item, i) => (
               <li
