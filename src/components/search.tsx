@@ -38,6 +38,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
 
     const response = await fetch(url, options);
     const data = await response.json();
+    console.log(data);
     return data.results as SearchResult[];
   });
 
