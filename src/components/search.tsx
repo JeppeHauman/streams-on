@@ -3,14 +3,20 @@ import {
   component$,
   useResource$,
   useSignal,
-  useTask$,
+  useVisibleTask$
 } from "@builder.io/qwik";
 
 export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
   const inputValue = useSignal("");
+  const searchMedia = useSignal("");
+
   const inputRef = useSignal<HTMLElement>();
 
   const isProd = import.meta.env.PROD;
+
+  useVisibleTask$(() => {
+    searchMedia.value = localStorage.getItem("searchMedia") || "movie";
+  });
 
   const dropdownItems = useResource$(async ({ cleanup, track }) => {
     track(() => inputValue.value);
@@ -32,7 +38,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
 
     const url = new URL(
       `${isProd ? "https://streams-on.vercel.app" : "http://localhost:4321/"
-      }/api/${inputValue.value}`
+      }/api/${inputValue.value}?media=${searchMedia.value}`
     );
 
     const response = await fetch(url, options);
@@ -40,9 +46,36 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
     console.log(data);
     return data.results as SearchResult[];
   });
-
   return (
     <div class="relative z-20">
+      What are you looking for?
+      <input
+        id="series"
+        name="media"
+        type="radio"
+        value="series"
+        checked
+        onChange$={(event, el) => {
+          searchMedia.value = el.value
+          localStorage.setItem("searchMedia", el.value);
+        }}
+      />
+      <label for="series">
+        Series
+      </label>
+      <input
+        id="movie"
+        name="media"
+        type="radio"
+        value="movie"
+        onChange$={(event, el) => {
+          searchMedia.value = el.value
+          localStorage.setItem("searchMedia", el.value);
+        }}
+      />
+      <label for="movie">
+        Movie
+      </label>
       <div class="relative">
         <input
           ref={inputRef}
@@ -132,3 +165,4 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
     </div>
   );
 });
+
