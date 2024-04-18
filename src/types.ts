@@ -1,7 +1,13 @@
-type SearchResult = {
+type MovieSearchResult = {
   id: string;
   title: string;
   original_title: string;
+  poster_path: string;
+};
+type SeriesSearchResult = {
+  id: string;
+  name: string;
+  original_name: string;
   poster_path: string;
 };
 

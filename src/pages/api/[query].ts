@@ -2,8 +2,8 @@ import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ params, url }) => {
   const query = params.query;
-  const media = url.searchParams.get("media")
-  console.log(media)
+  const media = url.searchParams.get("media");
+  console.log(media);
 
   const options = {
     method: "GET",
@@ -13,7 +13,7 @@ export const GET: APIRoute = async ({ params, url }) => {
     },
   };
   const link = new URL(
-    `https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&language=en-US`
+    `https://api.themoviedb.org/3/search/${media}?include_adult=false&page=1&language=en-US`
   );
   link.searchParams.set("query", query || "");
 
