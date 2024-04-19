@@ -53,7 +53,9 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
   return (
     <div class="relative z-20">
       <div
-        class={`flex gap-2 p-2 justify-end ${isHomepage && "justify-center"}`}
+        class={`flex gap-2 p-2 justify-end items-center ${
+          isHomepage ? "justify-center" : ""
+        }`}
       >
         {isHomepage && <p>What are you looking for?</p>}
         <div>
@@ -102,7 +104,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
       <div class="relative">
         <input
           ref={inputRef}
-          class="border-[3px] border-black outline-none ring-0 border-opacity-0 rounded-xl px-2 py-1 lg:py-2 lg:min-w-96 w-full bg-zinc-50 text-zinc-900 placeholder-zinc-600 focus:outline-none focus:border-orange-600 focus:border-[3px] transition-all"
+          class="border-[3px] border-black outline-none ring-0 border-opacity-0 rounded-sm sm:rounded-xl px-2 py-1 lg:py-2 lg:min-w-96 w-full bg-zinc-50 text-zinc-900 placeholder-zinc-600 focus:outline-none focus:border-orange-600 hover:border-zinc-500 focus:border-[3px] transition-all"
           type="text"
           placeholder="Search"
           value={inputValue.value}
