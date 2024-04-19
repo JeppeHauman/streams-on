@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 
-const year = new Date().getFullYear()
+const year = new Date().getFullYear();
 ---
 
 <footer class="py-3 gap-2 px-5 flex items-center justify-between">
@@ -13,7 +13,14 @@ const year = new Date().getFullYear()
       ><Icon name="mdi:github" size={34} /></a
     >
   </div>
-  <p>
-    Streams On © {year}
-  </p>
+  <div class="text-sm md:text-base">
+    <p>
+      Streams On © {year}
+    </p>
+    <p>
+      Data provided by <a href="https://www.themoviedb.org" class="underline"
+        >The Movie DB</a
+      >
+    </p>
+  </div>
 </footer>
