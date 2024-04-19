@@ -15,7 +15,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
   const isProd = import.meta.env.PROD;
 
   useVisibleTask$(() => {
-    searchMedia.value = localStorage.getItem("searchMedia") || "movie";
+    searchMedia.value = localStorage.getItem("searchMedia") || "tv";
   });
 
   const dropdownItems = useResource$(async ({ cleanup, track }) => {
