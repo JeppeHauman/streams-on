@@ -11,29 +11,29 @@ const options = {
     Authorization: `Bearer ${import.meta.env.PUBLIC_TMDB_AUTH}`,
   },
 };
-const url = new URL(`https://api.themoviedb.org/3/movie/${params.id}`);
+const url = new URL(`https://api.themoviedb.org/3/tv/${params.id}`);
 
 const response = await fetch(url, options);
-const data = await response.json();
+const data: Series = await response.json();
 ---
 
-<MainLayout movieTitle={data.title}>
+<MainLayout movieTitle={data.name}>
   <!-- topSection -->
   <div class="grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:p-12">
     <div
       class={`max-w-lg text-center mx-auto lg:text-left lg:mx-0 lg:ml-auto order-last lg:order-first p-5 lg:p-0`}
     >
       <h1 class="text-4xl lg:text-5xl font-bold mb-5">
-        {data.title}
+        {data.name}
       </h1>
       {
-        data.title != data.original_title && (
-          <h2 class="lg:text-3xl mb-2">{data.original_title}</h2>
+        data.name != data.original_name && (
+          <h2 class="lg:text-3xl mb-2">{data.original_name}</h2>
         )
       }
       <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
         {
-          data.genres.map(({ name }: { name: string }) => {
+          data.genres.map(({ name }) => {
             let bgColor = "";
 
             switch (name) {
@@ -91,6 +91,8 @@ const data = await response.json();
               case "Western":
                 bgColor = "bg-yellow-300";
                 break;
+              default:
+                bgColor = "bg-black";
             }
             return (
               <span
@@ -102,14 +104,14 @@ const data = await response.json();
           })
         }
       </div>
-      <p class="text-sm">Release date: {data.release_date}</p>
-      <p class="text-sm mb-3">Length: {data.runtime} minutes</p>
+      <p class="text-sm">Release date: {data.first_air_date}</p>
+      <p class="text-sm mb-4">Number of Seasons: {data.number_of_seasons}</p>
       <p class="text-balance mb-10">{data.overview}</p>
       <div
         class="rounded-lg p-4 bg-gradient-to-br from-[#dd4f02] to-[#f7aa00] text-white"
       >
         <h4 class="text-2xl mb-3">Streams on</h4>
-        <WhereToStream id={Number(params.id)} />
+        <WhereToStream id={Number(params.id)} isMovie={false} />
       </div>
     </div>
     <div class="relative">
@@ -118,11 +120,11 @@ const data = await response.json();
         src={data.poster_path
           ? `https://image.tmdb.org/t/p/original/${data.poster_path}`
           : "/imagePlaceholder.png"}
-        alt={`Poster for ${data.title}`}
+        alt={`Poster for ${data.name}`}
       />
     </div>
   </div>
   <div>
-    <RecommendationsList id={params.id!} />
+    <RecommendationsList id={params.id!} isMovie={false} />
   </div>
 </MainLayout>

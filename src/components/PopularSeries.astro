@@ -1,0 +1,22 @@
+---
+import PopularList from "./PopularList.astro";
+
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${import.meta.env.PUBLIC_TMDB_AUTH}`,
+  },
+};
+const url = new URL(
+  `https://api.themoviedb.org/3/trending/tv/week?language=en-US`
+);
+const response = await fetch(url, options);
+const data = await response.json();
+const series = data.results.slice(0, 6);
+---
+
+<h2 class="text-center font-bold text-xl sm:text-2xl mt-4 text-orange-600">
+  Popular Series
+</h2>
+<PopularList series={series} />

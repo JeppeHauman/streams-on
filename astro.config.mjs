@@ -8,7 +8,7 @@ import vercel from "@astrojs/vercel/serverless";
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  integrations: [qwikdev(), tailwind(), icon()],
+  integrations: [qwikdev(), tailwind({ applyBaseStyles: false }), icon()],
   adapter: vercel(),
   image: {
     domains: ["themoviedb.org"],

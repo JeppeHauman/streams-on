@@ -1,7 +1,10 @@
 ---
 import { WhereToStreamQwik } from "./WhereToStreamQwik";
-
-const { id } = Astro.props;
+interface Props {
+  id: number;
+  isMovie?: boolean;
+}
+const { id, isMovie = true } = Astro.props;
 const options = {
   method: "GET",
   headers: {
@@ -9,7 +12,9 @@ const options = {
     Authorization: `Bearer ${import.meta.env.PUBLIC_TMDB_AUTH}`,
   },
 };
-const url = new URL(`https://api.themoviedb.org/3/movie/${id}/watch/providers`);
+const url = new URL(
+  `https://api.themoviedb.org/3/${isMovie ? "movie" : "tv"}/${id}/watch/providers`
+);
 const response = await fetch(url, options);
 const data = await response.json();
 let countryCodes: string[] = [];

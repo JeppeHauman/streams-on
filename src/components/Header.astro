@@ -7,12 +7,16 @@ const isHomePage = Astro.url.pathname === "/";
 ---
 
 <header
-  class="flex backdrop-blur z-50 justify-between items-center mb-5 gap-5 px-3 py-1 lg:py-3 shadow-md border-b border-zinc-800 sticky top-0"
+  class="flex backdrop-blur z-40 justify-end sm:justify-between items-center mb-5 gap-5 px-3 py-1 lg:py-3 shadow-md border-b border-zinc-800 sticky top-0"
 >
-  <a class="w-8 lg:w-12" href="/"
-    ><Image src={logo} alt={"Streams On logo"} /></a
+  <div
+    class={`${!isHomePage && "absolute sm:static"} w-8 lg:w-12 top-2 left-5`}
   >
-  <div class="grow max-w-sm lg:max-w-lg">
+    <a class="relative z-50" href="/"
+      ><Image src={logo} alt={"Streams On logo"} /></a
+    >
+  </div>
+  <div class="grow sm:max-w-lg">
     {!isHomePage && <Search isHomepage={isHomePage} />}
   </div>
 </header>
