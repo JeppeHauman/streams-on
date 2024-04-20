@@ -17,6 +17,8 @@ const isHomepage = Astro.url.pathname === "/";
   </div>
   <div class="mt-10 lg:mt-32 p-4 flex flex-col max-w-lg mx-auto gap-4">
     <Search isHomepage={isHomepage} />
+  </div>
+  <div class="md:flex gap-14 max-w-6xl mx-auto p-3 justify-center">
     <PopularMovies />
     <PopularSeries />
   </div>

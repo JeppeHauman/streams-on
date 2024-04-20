@@ -52,7 +52,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
   return (
     <div class="relative z-20">
       <div
-        class={`flex gap-2 p-2 justify-end items-center ${isHomepage ? "justify-center" : ""
+        class={`flex gap-2 p-2 justify-end items-center ${isHomepage ? "justify-center mb-4" : ""
           }`}
       >
         {isHomepage && <p>What are you looking for?</p>}
@@ -64,7 +64,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
             type="radio"
             value="tv"
             checked={searchMedia.value === "tv"}
-            onChange$={(event, el) => {
+            onChange$={(_, el) => {
               searchMedia.value = el.value;
               localStorage.setItem("searchMedia", el.value);
             }}
@@ -85,7 +85,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
             type="radio"
             value="movie"
             checked={searchMedia.value === "movie"}
-            onChange$={(event, el) => {
+            onChange$={(_, el) => {
               searchMedia.value = el.value;
               localStorage.setItem("searchMedia", el.value);
             }}

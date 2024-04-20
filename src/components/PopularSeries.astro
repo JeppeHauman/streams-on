@@ -16,7 +16,9 @@ const data = await response.json();
 const series = data.results.slice(0, 6);
 ---
 
-<h2 class="text-center font-bold text-xl sm:text-2xl mt-4 text-orange-600">
-  Popular Series
-</h2>
-<PopularList series={series} />
+<div class="max-w-lg mx-auto">
+  <h2 class="text-center font-bold text-xl sm:text-2xl mb-4 mt-8 text-orange-600">
+    Popular Series
+  </h2>
+  <PopularList series={series} />
+</div>
