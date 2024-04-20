@@ -1,7 +1,6 @@
 import {
   component$,
   useSignal,
-  useTask$,
   useVisibleTask$,
 } from "@builder.io/qwik";
 import countries from "i18n-iso-countries";
@@ -14,7 +13,6 @@ interface Props {
 
 export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
   const countryCode = useSignal<string>("");
-  const countryName = useSignal("");
   const countryProviders = useSignal<{
     link: string;
     flatrate?: {
@@ -67,7 +65,7 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
           style="scrollbar-width:thin;"
           name="countries"
           id="countries-select"
-          onChange$={(event, el) => {
+          onChange$={(_, el) => {
             countryCode.value = el.value;
             localStorage.setItem("countryCode", el.value);
           }}
@@ -94,12 +92,6 @@ export const WhereToStreamQwik = component$<Props>(({ data, countryCodes }) => {
         </select>
       </div>
       <p class="text-xs text-right">Data provided by JustWatch</p>
-      {/* <div class="flex gap-2 flex-wrap">
-        {countryCodes.map((cC) => (
-          <button onClick$={() => (countryCode.value = cC)}>{cC}</button>
-        ))}
-      </div> */}
-      {/* <CountrySwitcher countries={Object.keys(data.results)} /> */}
     </div>
   );
 });
