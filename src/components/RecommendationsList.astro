@@ -29,7 +29,7 @@ const movies = data.results;
   Recommended {isMovie ? "movies" : "series"}
 </h3>
 <div
-  class="grid grid-flow-col auto-cols-[47%] sm:auto-cols-[31%] md:auto-cols-[23%] lg:auto-cols-[15%] xl:auto-cols-[11%] gap-4 overflow-x-auto overscroll-x-contain snap-mandatory snap-x *:snap-start px-4 scroll-px-3 pb-2"
+  class="grid grid-flow-col auto-cols-[47%] sm:auto-cols-[31%] md:auto-cols-[23%] lg:auto-cols-[15%] xl:auto-cols-[11%] gap-4 overflow-x-auto overscroll-x-contain snap-mandatory snap-x *:snap-start px-4 scroll-px-3 pb-2 thin-scrollbar"
 >
   {
     isMovie && movies
@@ -51,3 +51,12 @@ const movies = data.results;
         ))
   }
 </div>
+
+<style>
+  .thin-scrollbar {
+    scrollbar-width: thin;
+  }
+  html {
+    scrollbar-color: #727274 #17171a;
+  }
+</style>
