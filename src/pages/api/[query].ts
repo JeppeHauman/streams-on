@@ -3,7 +3,6 @@ import type { APIRoute } from "astro";
 export const GET: APIRoute = async ({ params, url }) => {
   const query = params.query;
   const media = url.searchParams.get("media");
-  console.log(media);
 
   const options = {
     method: "GET",
