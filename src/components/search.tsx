@@ -67,12 +67,9 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
 
     const response = await fetch(url, options);
     const data = await response.json();
-    let filteredRestults = data.results.filter((item) => item.vote_count);
-    console.log(filteredRestults.sort((a, b) => b.vote_count - a.vote_count));
-    if (searchMedia.value === "movie") {
-      return filteredRestults as MovieSearchResult[];
-    }
-    return filteredRestults as SeriesSearchResult[];
+    let filteredRestults = data.results.filter((item: SearchResult) => item.vote_count) as SearchResult[];
+    filteredRestults.sort((a, b) => b.vote_count - a.vote_count);
+    return filteredRestults
   });
 
   return (
@@ -155,7 +152,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
                           ? `https://media.themoviedb.org/t/p/original${item.poster_path}`
                           : "../../imagePlaceholder.png"
                       }
-                      alt={`Movieposter of ${"name" in item ? item.name : item.title
+                      alt={`Movie poster of ${"name" in item ? item.name : item.title
                         }`}
                     />
                   </div>
@@ -169,7 +166,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
                       : item.original_title !== item.title && (
                         <p class="">{item.original_title}</p>
                       )}
-                    <p>{item.media_type}</p>
+                    <p class="text-gray-400 italic">{item.media_type}</p>
                   </div>
                 </a>
               </li>
