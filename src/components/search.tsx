@@ -68,11 +68,12 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
 
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data.results.sort((a, b) => b.vote_count - a.vote_count));
+    let filteredRestults = data.results.filter((item) => item.vote_count);
+    console.log(filteredRestults.sort((a, b) => b.vote_count - a.vote_count));
     if (searchMedia.value === "movie") {
-      return data.results as MovieSearchResult[];
+      return filteredRestults as MovieSearchResult[];
     }
-    return data.results as SeriesSearchResult[];
+    return filteredRestults as SeriesSearchResult[];
   });
 
   return (
