@@ -1,10 +1,26 @@
 import {
+  $,
   Resource,
   component$,
   useResource$,
   useSignal,
   useVisibleTask$,
+  type QRL,
 } from "@builder.io/qwik";
+
+export const useDebouncer = <A extends unknown[], R>(
+  fn: QRL<(...args: A) => R>,
+  delay: number
+): QRL<(...args: A) => void> => {
+  const timeoutId = useSignal<number>();
+
+  return $((...args: A): void => {
+    window.clearTimeout(timeoutId.value);
+    timeoutId.value = window.setTimeout((): void => {
+      void fn(...args);
+    }, delay);
+  });
+};
 
 export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
   const inputValue = useSignal("");
@@ -13,6 +29,13 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
   const inputRef = useSignal<HTMLElement>();
 
   const isProd = import.meta.env.PROD;
+
+  const debounce = useDebouncer(
+    $((value: string) => {
+      inputValue.value = value;
+    }),
+    500
+  );
 
   useVisibleTask$(() => {
     searchMedia.value = localStorage.getItem("searchMedia") || "tv";
@@ -38,22 +61,26 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
     };
 
     const url = new URL(
-      `${isProd ? "https://streams-on.vercel.app" : "http://localhost:4321/"
+      `${
+        isProd ? "https://streams-on.vercel.app" : "http://localhost:4321/"
       }/api/${inputValue.value}?media=${searchMedia.value}`
     );
 
     const response = await fetch(url, options);
     const data = await response.json();
+    console.log(data.results);
     if (searchMedia.value === "movie") {
       return data.results as MovieSearchResult[];
     }
     return data.results as SeriesSearchResult[];
   });
+
   return (
     <div class="relative z-20">
       <div
-        class={`flex gap-2 p-2 justify-end items-center ${isHomepage ? "justify-center mb-4" : ""
-          }`}
+        class={`flex gap-2 p-2 justify-end items-center ${
+          isHomepage ? "justify-center mb-4" : ""
+        }`}
       >
         {isHomepage && <p>What are you looking for?</p>}
         <div>
@@ -104,14 +131,19 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
           ref={inputRef}
           class="border-[3px] border-black outline-none ring-0 border-opacity-0 rounded-sm sm:rounded-xl px-2 py-1 lg:py-2 lg:min-w-96 w-full bg-zinc-50 text-zinc-900 placeholder-zinc-600 focus:outline-none focus:border-orange-600 hover:border-zinc-500 focus:border-[3px] transition-all"
           type="text"
-          placeholder={`Search ${searchMedia.value == 'tv' ? "Series" : "Movies"}`}
+          placeholder={`Search ${
+            searchMedia.value == "tv" ? "Series" : "Movies"
+          }`}
           value={inputValue.value}
-          onInput$={(_, element) => (inputValue.value = element.value)}
+          onInput$={(_, target) => {
+            debounce(target.value);
+          }}
         />
 
         <button
-          class={`${inputValue.value.length < 1 && "hidden"
-            } absolute inline-block text-2xl font-bold right-2 top-1/2 -translate-y-1/2 text-zinc-900 hover:text-zinc-700`}
+          class={`${
+            inputValue.value.length < 1 && "hidden"
+          } absolute inline-block text-2xl font-bold right-2 top-1/2 -translate-y-1/2 text-zinc-900 hover:text-zinc-700`}
           onClick$={() => {
             inputValue.value = "";
             inputRef.value?.focus();
@@ -143,12 +175,15 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
         )}
         onResolved={(items) => (
           <ul
-            class={`absolute overflow-y-auto overflow-x-hidden left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 ${items.length != 0 && "p-1"
-              }  ${items.length === 1 && "h-24"} ${items.length === 2 && "h-44"
-              } ${items.length === 3 && "h-72"} ${items.length > 3 && isHomepage
+            class={`absolute overflow-y-auto overflow-x-hidden left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 ${
+              items.length != 0 && "p-1"
+            }  ${items.length === 1 && "h-24"} ${
+              items.length === 2 && "h-44"
+            } ${items.length === 3 && "h-72"} ${
+              items.length > 3 && isHomepage
                 ? "h-[50vh]"
                 : items.length > 3 && "h-[70vh]"
-              } `}
+            } `}
           >
             {items.map((item, i) => (
               <li
@@ -158,8 +193,9 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
                 <a
                   class="w-full h-full grid grid-cols-[1fr_5fr] gap-2"
                   onClick$={() => (inputValue.value = "")}
-                  href={`/${searchMedia.value === "movie" ? "movie" : "series"
-                    }/${item.id}`}
+                  href={`/${
+                    searchMedia.value === "movie" ? "movie" : "series"
+                  }/${item.id}`}
                 >
                   <div class="w-8 lg:w-12">
                     <img
@@ -169,8 +205,9 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
                           ? `https://media.themoviedb.org/t/p/original${item.poster_path}`
                           : "../../imagePlaceholder.png"
                       }
-                      alt={`Movieposter of ${"name" in item ? item.name : item.title
-                        }`}
+                      alt={`Movieposter of ${
+                        "name" in item ? item.name : item.title
+                      }`}
                     />
                   </div>
 
@@ -178,11 +215,12 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
                     <p class="">{"name" in item ? item.name : item.title}</p>
                     {"name" in item
                       ? item.original_name !== item.name && (
-                        <p class="">{item.original_name}</p>
-                      )
+                          <p class="">{item.original_name}</p>
+                        )
                       : item.original_title !== item.title && (
-                        <p class="">{item.original_title}</p>
-                      )}
+                          <p class="">{item.original_title}</p>
+                        )}
+                    <p>{item.media_type}</p>
                   </div>
                 </a>
               </li>

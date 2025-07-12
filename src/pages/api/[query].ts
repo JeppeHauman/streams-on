@@ -11,8 +11,10 @@ export const GET: APIRoute = async ({ params, url }) => {
       Authorization: `Bearer ${import.meta.env.PUBLIC_TMDB_AUTH}`,
     },
   };
+
+  // https://api.themoviedb.org/3/search/multi
   const link = new URL(
-    `https://api.themoviedb.org/3/search/${media}?include_adult=false&page=1&language=en-US`
+    `https://api.themoviedb.org/3/search/multi?page=1&language=en-US`
   );
   link.searchParams.set("query", query || "");
 

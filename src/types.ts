@@ -11,6 +11,12 @@ type SeriesSearchResult = {
   poster_path: string;
 };
 
+type SearchResult = {
+  id: string;
+  name?: string;
+  title?: string;
+};
+
 type Movie = {
   id: number;
   title: string;
