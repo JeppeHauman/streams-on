@@ -14,7 +14,7 @@ export const GET: APIRoute = async ({ params, url }) => {
 
   // https://api.themoviedb.org/3/search/multi
   const link = new URL(
-    `https://api.themoviedb.org/3/search/multi?page=1&language=en-US`
+    `https://api.themoviedb.org/3/search/multi?language=en-US`
   );
   link.searchParams.set("query", query || "");
 

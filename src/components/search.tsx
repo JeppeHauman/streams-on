@@ -68,7 +68,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
 
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data.results);
+    console.log(data.results.sort((a, b) => b.vote_count - a.vote_count));
     if (searchMedia.value === "movie") {
       return data.results as MovieSearchResult[];
     }
