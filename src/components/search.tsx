@@ -84,57 +84,13 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
         }`}
       >
         {isHomepage && <p>What are you looking for?</p>}
-        <div>
-          <input
-            class="hidden peer"
-            id="series"
-            name="media"
-            type="radio"
-            value="tv"
-            checked={searchMedia.value === "tv"}
-            onChange$={(_, el) => {
-              searchMedia.value = el.value;
-              localStorage.setItem("searchMedia", el.value);
-            }}
-          />
-          <label
-            for="series"
-            class="peer-checked:text-orange-600 text-xs lg:text-base py-1 px-2 border rounded-md peer-checked:border-orange-600
-              peer-hover:cursor-pointer peer-checked:hover:border-orange-600 peer-checked:hover:text-orange-600 peer-hover:bg-zinc-800 peer-checked:hover:bg-zinc-900"
-          >
-            Series
-          </label>
-        </div>
-        <div>
-          <input
-            class="hidden peer"
-            id="movie"
-            name="media"
-            type="radio"
-            value="movie"
-            checked={searchMedia.value === "movie"}
-            onChange$={(_, el) => {
-              searchMedia.value = el.value;
-              localStorage.setItem("searchMedia", el.value);
-            }}
-          />
-          <label
-            for="movie"
-            class="peer-checked:text-orange-600 text-xs lg:text-base py-1 px-2 border rounded-md peer-checked:border-orange-600
-              peer-hover:cursor-pointer peer-checked:hover:border-orange-600 peer-checked:hover:text-orange-600 peer-hover:bg-zinc-800 peer-checked:hover:bg-zinc-900"
-          >
-            Movie
-          </label>
-        </div>
       </div>
       <div class="relative">
         <input
           ref={inputRef}
           class="border-[3px] border-black outline-none ring-0 border-opacity-0 rounded-sm sm:rounded-xl px-2 py-1 lg:py-2 lg:min-w-96 w-full bg-zinc-50 text-zinc-900 placeholder-zinc-600 focus:outline-none focus:border-orange-600 hover:border-zinc-500 focus:border-[3px] transition-all"
           type="text"
-          placeholder={`Search ${
-            searchMedia.value == "tv" ? "Series" : "Movies"
-          }`}
+          placeholder={`Search Movie or Series`}
           value={inputValue.value}
           onInput$={(_, target) => {
             debounce(target.value);
@@ -194,9 +150,9 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
                 <a
                   class="w-full h-full grid grid-cols-[1fr_5fr] gap-2"
                   onClick$={() => (inputValue.value = "")}
-                  href={`/${
-                    searchMedia.value === "movie" ? "movie" : "series"
-                  }/${item.id}`}
+                  href={`/${item.media_type === "movie" ? "movie" : "series"}/${
+                    item.id
+                  }`}
                 >
                   <div class="w-8 lg:w-12">
                     <img
