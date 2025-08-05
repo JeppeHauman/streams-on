@@ -3,6 +3,9 @@ import RecommendationsList from "../../components/RecommendationsList.astro";
 import WhereToStream from "../../components/WhereToStream.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
 
+const ip = Astro.clientAddress;
+console.log("ip: " + ip);
+
 const params = Astro.params;
 const options = {
   method: "GET",
@@ -15,7 +18,6 @@ const url = new URL(`https://api.themoviedb.org/3/movie/${params.id}`);
 
 const response = await fetch(url, options);
 const data = await response.json();
-console.log(data);
 ---
 
 <MainLayout movieTitle={data.title}>
