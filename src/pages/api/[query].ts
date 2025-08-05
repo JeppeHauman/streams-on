@@ -1,8 +1,10 @@
 import type { APIRoute } from "astro";
 
-export const GET: APIRoute = async ({ params, url }) => {
+export const GET: APIRoute = async ({ params, url, clientAddress }) => {
   const query = params.query;
   const media = url.searchParams.get("media");
+
+  console.log(clientAddress);
 
   const options = {
     method: "GET",
