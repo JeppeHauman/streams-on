@@ -61,22 +61,27 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
     };
 
     const url = new URL(
-      `${isProd ? "https://streams-onasdasdasdasdasdasd.vercel.app/" : "http://localhost:4321/"
+      `${
+        isProd ? "https://streams-on.vercel.app/" : "http://localhost:4321/"
       }/api/${inputValue.value}?media=${searchMedia.value}`
     );
 
     const response = await fetch(url, options);
     const data = await response.json();
-    let filteredRestults = data.results.filter((item: SearchResult) => item.vote_count) as SearchResult[];
+    let filteredRestults = data.results.filter(
+      (item: SearchResult) => item.vote_count
+    ) as SearchResult[];
     filteredRestults.sort((a, b) => b.vote_count - a.vote_count);
-    return filteredRestults
+    console.log(filteredRestults);
+    return filteredRestults;
   });
 
   return (
     <div class="relative  justify-end z-20">
       <div
-        class={`flex gap-2 justify-end items-center ${isHomepage ? "justify-center mb-4" : ""
-          }`}
+        class={`flex gap-2 justify-end items-center ${
+          isHomepage ? "justify-center mb-4" : ""
+        }`}
       >
         {isHomepage && <p>What are you looking for?</p>}
       </div>
@@ -93,8 +98,9 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
         />
 
         <button
-          class={`${inputValue.value.length < 1 && "hidden"
-            } absolute inline-block text-2xl font-bold right-2 top-1/2 -translate-y-1/2 text-zinc-900 hover:text-zinc-700`}
+          class={`${
+            inputValue.value.length < 1 && "hidden"
+          } absolute inline-block text-2xl font-bold right-2 top-1/2 -translate-y-1/2 text-zinc-900 hover:text-zinc-700`}
           onClick$={() => {
             inputValue.value = "";
             inputRef.value?.focus();
@@ -126,12 +132,15 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
         )}
         onResolved={(items) => (
           <ul
-            class={`absolute overflow-y-auto overflow-x-hidden left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 ${items.length != 0 && "p-1"
-              }  ${items.length === 1 && "h-24"} ${items.length === 2 && "h-44"
-              } ${items.length === 3 && "h-72"} ${items.length > 3 && isHomepage
+            class={`absolute overflow-y-auto overflow-x-hidden left-0 right-0 divide-y-2 divide-zinc-900 divide-opacity-40 rounded-md bg-zinc-950 text-orange-600 ${
+              items.length != 0 && "p-1"
+            }  ${items.length === 1 && "h-24"} ${
+              items.length === 2 && "h-44"
+            } ${items.length === 3 && "h-72"} ${
+              items.length > 3 && isHomepage
                 ? "h-[50vh]"
                 : items.length > 3 && "h-[70vh]"
-              } `}
+            } `}
           >
             {items.map((item, i) => (
               <li
@@ -141,8 +150,9 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
                 <a
                   class="w-full h-full grid grid-cols-[1fr_5fr] gap-2"
                   onClick$={() => (inputValue.value = "")}
-                  href={`/${item.media_type === "movie" ? "movie" : "series"}/${item.id
-                    }`}
+                  href={`/${item.media_type === "movie" ? "movie" : "series"}/${
+                    item.id
+                  }`}
                 >
                   <div class="w-8 lg:w-12">
                     <img
@@ -152,8 +162,9 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
                           ? `https://media.themoviedb.org/t/p/original${item.poster_path}`
                           : "../../imagePlaceholder.png"
                       }
-                      alt={`Movie poster of ${"name" in item ? item.name : item.title
-                        }`}
+                      alt={`Movie poster of ${
+                        "name" in item ? item.name : item.title
+                      }`}
                     />
                   </div>
 
@@ -161,11 +172,11 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
                     <p class="">{"name" in item ? item.name : item.title}</p>
                     {"name" in item
                       ? item.original_name !== item.name && (
-                        <p class="">{item.original_name}</p>
-                      )
+                          <p class="">{item.original_name}</p>
+                        )
                       : item.original_title !== item.title && (
-                        <p class="">{item.original_title}</p>
-                      )}
+                          <p class="">{item.original_title}</p>
+                        )}
                     <p class="text-gray-400 italic">{item.media_type}</p>
                   </div>
                 </a>
