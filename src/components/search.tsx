@@ -61,7 +61,7 @@ export const Search = component$(({ isHomepage }: { isHomepage: boolean }) => {
     };
 
     const url = new URL(
-      `${isProd ? "https://streams-on.vercel.app" : "http://localhost:4321/"
+      `${isProd ? "https://streams-onasdasdasdasdasdasd.vercel.app/" : "http://localhost:4321/"
       }/api/${inputValue.value}?media=${searchMedia.value}`
     );
 
