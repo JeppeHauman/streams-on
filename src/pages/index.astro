@@ -4,6 +4,9 @@ import MainLayout from "../layouts/MainLayout.astro";
 import PopularMovies from "../components/PopularMovies.astro";
 import PopularSeries from "../components/PopularSeries.astro";
 
+const ip = Astro.clientAddress;
+console.log("ip: " + ip);
+
 const isHomepage = Astro.url.pathname === "/";
 ---
 
