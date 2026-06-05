@@ -17,6 +17,7 @@ type Movie = {
   overview: string;
   poster_path: string;
   runtime: number;
+  imdb_id: number
 };
 
 type Series = {
@@ -31,4 +32,5 @@ type Series = {
     id: number;
     name: string;
   }[];
+  imdb_id: number
 };

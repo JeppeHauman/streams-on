@@ -1,0 +1,9 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/imdb.svg"
+const { imdbId } = Astro.props;
+---
+
+<a href={`https://www.imdb.com/title/${imdbId}`} target="_blank" class="w-fit mx-auto lg:mx-0 transition-all block duration-75 hover:scale-105">
+  <Image src={logo} alt="Imdb Logo" class="w-12 my-4" />
+</a>
