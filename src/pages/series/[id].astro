@@ -109,7 +109,6 @@ const data: Series = await response.json();
           })
         }
       </div>
-      <IMDBBadge imdbId={data.imdb_id }/>
       <p class="text-sm">Release date: {data.first_air_date}</p>
       <p class="text-sm mb-4">Number of Seasons: {data.number_of_seasons}</p>
       <p class="text-balance mb-10">{data.overview}</p>
